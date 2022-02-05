@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome to MedEZ</title>
+        
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+        <!-- Ajax -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body class="hold-transition sidebar-mini">
+        <div class="wrapper">
+            <!-- Navbar -->
+            <nav class="card-header navbar navbar-expand navbar-white navbar-light">
+                <!-- Left navbar links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="/" class="nav-link">About Us</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="/pharmacyLogin" class="nav-link">Seller Login</a>
+                    </li>
+
+                    <li class="nav-item d-none d-sm-inline-block">
+                        <a href="/customerLogin" class="nav-link">Customer Login</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="card-body fixed">
+                <section class="content-header">
+                    <h1>MedEZ</h1>
+                </section>
+
+                <section class="content-body">
+                    <div class="card">
+                        <div class="card-title card-header bg-primary">Pharmacy Portal</div>
+                        <form action="/addPharmacyLogin" method="post">
+                            <div class="card-body">
+                                <div class="row form-control-sm" style="margin: 20px 0;">
+                                    <label for="" class="form-control-sm col-4 col-form-label">Enter Pharmacy Name</label>
+                                    <div class="col-8"><input type="text" class="form-control form-control-sm" placeholder="Enter your Pharmacy Name" id="pharmacyName" name="pharmacyName" required></div>
+                                </div>
+                                <div class="row form-control-sm" style="margin: 20px 0;">
+                                    <label for="" class="form-control-sm col-4 col-form-label">Enter Login ID</label>
+                                    <div class="col-8"><input type="email" class="form-control form-control-sm" placeholder="Enter your Login ID" id="pharmacyID" name="pharmacyID" required></div>
+                                </div>
+                                <div class="row form-control-sm" style="margin: 20px 0;">
+                                    <label for="" class="form-control-sm col-4 col-form-label">Choose a Password</label>
+                                    <div class="col-8"><input type="password" class="form-control form-control-sm" placeholder="Enter your Password" id="pharmacyPassword" name="pharmacyPassword" required></div>
+                                </div>
+                                <div class="row form-control-sm" style="margin: 20px 0;">
+                                    <label for="" class="form-control-sm col-4 col-form-label">Confirm Password</label>
+                                    <div class="col-8"><input type="password" class="form-control form-control-sm" placeholder="Confirm your Password" id="pharmacyPasswordConfirm" name="pharmacyPasswordConfirm" required></div>
+                                </div>
+
+                                <div class="form-control-sm" style="margin: 20px 0;">
+                                    <div class="row form-control-sm">
+                                        <label class="form-control-sm col-4 col-form-label" for="">Select Country</label><br>
+                                        <select class="col-8" name="country" id="country" required>
+                                            <option value="">--Select Country--</option>
+                                            <% if(data.length > 0) {
+                                                for(var i = 0; i < data.length; i++) { %>
+                                                    <option value="<%= data[i].id %>"><%= data[i].name %></option>
+                                                <% }
+                                            } %>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-control-sm" style="margin: 20px 0;">
+                                    <div class="row form-control-sm" id="stateselect">
+                                        <label class="form-control-sm col-4 col-form-label" for="">Select State</label><br>
+                                        <select class="col-8" name="state" id="state" required>
+                                            <option value="" disabled="true">--Select State--</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-control-sm" style="margin: 20px 0;">
+                                    <div class="row form-control-sm" id="cityselect">
+                                        <label class="form-control-sm col-4 col-form-label" for="">Select City</label><br>
+                                        <select class="col-8" name="city" id="city" required>
+                                            <option value="" disabled="true">--Select City--</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row form-control-sm" style="margin: 40px 0;">
+                                    <label for="" class="form-control-sm col-4 col-form-label">Enter address</label>
+                                    <div class="col-8"><input type="text" class="form-control form-control-sm" placeholder="Enter Pharmacy Address" id="pharmacyAddress" name="pharmacyAddress" required></div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer row" style="margin: 0;">
+                                <ul class="">
+                                    <button type="submit" class="btn btn-info" id="registerButton" disabled="true">Register</button>
+                                </ul>
+                                <ul class="ml-auto">
+                                    <a href="/pharmacyLogin">Already a part of our system? Sign-in.</a>
+                                </ul>
+                            </div>
+                        </form>
+                        <script>
+                            $('#city').on('input', check);
+                            $('#pharmacyPasswordConfirm').on('input', check);
+                            $('#pharmacyPassword').on('input', check);
+                            $('#pharmacyID').on('input', check);
+                            $('#pharmacyName').on('input', check);
+
+                            function check() {
+                                if(document.getElementById("pharmacyName").value != "" && document.getElementById("pharmacyID").value != "" && document.getElementById("pharmacyPassword").value != "" && document.getElementById("pharmacyPassword").value.localeCompare(document.getElementById("pharmacyPasswordConfirm").value) == 0 && document.getElementById("city").value != "") {
+                                    document.getElementById("registerButton").disabled = false;
+                                } else {
+                                    document.getElementById("registerButton").disabled = true;
+                                }
+                            }
+
+                            var loc;
+                            if(window.location.port != "") {
+                                loc = window.location.protocol+"//"+window.location.hostname+":"+window.location.port;
+                            } else {
+                                loc = window.location.protocol+"//"+window.location.hostname;
+                            }
+
+                            $(document).ready(function() {
+                                $('#country').on('input', function() {
+                                    document.getElementById("registerButton").disabled = true;
+                                    var country_id = this.value;
+                                    $("#state").html('');
+                                    $.ajax({
+                                        url: loc+"/getstates",
+                                        type: "POST",
+                                        data: {
+                                            name: 'countrylabel',
+                                            country_id: country_id,
+                                        },
+                                        dataType: 'json',
+                                        success: function(result) {
+                                            $('#state').html('<option value="">--Select State--</option>');
+                                            $.each(result.states, function(key, value) {
+                                                $("#state").append('<option value="' + value.id + '">' + value.name + '</option>');
+                                            });
+                                            $('#city').html('<option value="" disabled="true">--Select City--</option>')
+                                        }
+                                    });
+                                });
+
+                                $('#state').on('change', function() {
+                                    document.getElementById("registerButton").disabled = true;
+                                    var state_id = this.value;
+                                    $("#city").html('');
+                                    $.ajax({
+                                        url: loc+"/getcities",
+                                        type: "POST",
+                                        data: {
+                                            name: 'statelabel',
+                                            state_id: state_id,
+                                        },
+                                        dataType: 'json',
+                                        success: function(result) {
+                                            $('#city').html('<option value="">--Select City--</option>');
+                                            $.each(result.cities, function(key, value) {
+                                                $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
+                                            });
+                                        }
+                                    });
+                                });
+                            }); 
+                        </script>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </body>
+</html>

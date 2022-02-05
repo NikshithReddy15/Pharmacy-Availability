@@ -1,0 +1,279 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+        <title>MedEZ: Pharmcy Portal Dashboard</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <!-- Ajax -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+
+    <body class="hold-transition sidebar-mini">
+        <div class="wrapper">
+
+            <!-- Navbar -->
+            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"> 
+                            <i class="fas fa-bars"></i>
+                        </a>
+                    </li>
+                </ul>
+                <a href="/customerDashboard" class="nav-link" style="color: grey;">Home</a>
+                <a href="/customerLogout" class="nav-link ml-auto" id="logoutButton" style="color: lightgrey;" onmouseenter="change()" onmouseleave="back()">Logout</a>
+ 
+            </nav>
+            <!-- /.navbar -->
+            
+            <aside class="main-sidebar sidebar-dark-primary elevation-4">
+                <a href="/customerProfileInfo" class="brand-link">
+                    <span class="brand-text">
+                        Welcome, <br>
+                        <span class="brand-text font-weight-light" style="font-size: medium;"><%=details[0].name%></span>
+                    </span>
+                </a>
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <!-- Sidebar Menu -->
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <li class="nav-item">
+                                <a href="ordersPage" class="nav-link">
+                                <i class="nav-icon far fa-circle text-info"></i>
+                                <p class="text">Orders</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- /.sidebar-menu -->
+                </div>
+                <!-- /.sidebar -->
+            </aside>
+            
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                
+                <section class="content-header">
+                    <h1>MedEZ</h1>
+                </section>
+                
+                <section class="content">
+                    <div class="row" style="margin: 20px 0; position: inherit;">
+                        <div class="form-control-sm col-4">
+                            <label class="col-form-label" for="">Select Country</label><br>
+                            <select class="" name="country" id="country" style="width: inherit;" required>
+                                <option value="">--Select Country--</option>
+                                <% if(data.length > 0) {
+                                    for(var i = 0; i < data.length; i++) { %>
+                                        <option value="<%= data[i].id %>"><%= data[i].name %></option>
+                                    <% }
+                                } %>
+                            </select>
+                        </div>
+                        <div class="form-control-sm col-4" id="stateselect">
+                            <label class="col-form-label" for="">Select State</label><br>
+                            <select class="" name="state" id="state" style="width: inherit;" required>
+                                <option value="" disabled="true">--Select State--</option>
+                            </select>
+                        </div>
+                        <div class="form-control-sm col-4" id="cityselect">
+                            <label class="col-form-label" for="">Select City</label><br>
+                            <select class="" name="city" id="city" style="width: inherit;" required>
+                                <option value="" disabled="true">--Select City--</option>
+                            </select>
+                        </div>
+                    </div><br>
+                    <div class="row form-control-sm" style="margin: 20px 0; position: inherit;">
+                        <label class="form-control-sm col-4" for="">Enter medicine name:</label>
+                        <div class="col-8"><input type="text" class="form-control-sm" placeholder="Medicine or category name" name="medicineName" id="medicineName"></div>
+                    </div>
+                    <div class="card" style="padding: 8px; position: inherit;">
+                        <div class="card-header">
+                            <h3 class="card-title">Stock Details</h3>
+
+                            <div class="card-tools">
+                                <div class="input-group input-group-sm">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse" style="margin-top: 5px;">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body table-responsive p-0" style="height: auto; max-height: 50%; margin-right: 0%;">
+                            <table class="table table-striped table-bordered table-head-fixed text-nowrap" id="detailstable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10%" aria-controls="detailstable">Medicine</th>
+                                        <th style="width: 10%" aria-controls="detailstable">Category</th>
+                                        <th style="width: 10%" aria-controls="detailstable">Pharmacy Name</th>
+                                        <th style="width: 10%" aria-controls="detailstable">Location</th>
+                                        <th style="width: 15%" aria-controls="detailstable">Stock Available</th>
+                                        <th style="width: 10%" aria-controls="detailstable">Price</th>
+                                        <!--<th style="width: 10%" aria-controls="detailstable">Action</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBody">
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+            </aside>
+            <!-- /.control-sidebar -->
+        </div>
+        <!-- ./wrapper -->
+
+        <!-- jQuery -->
+        <script src="/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- overlayScrollbars -->
+        <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="/dist/js/adminlte.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="/dist/js/demo.js"></script>
+        <!-- Socket.io -->
+        <script src="https://cdn.socket.io/4.4.0/socket.io.min.js" integrity="sha384-1fOn6VtTq3PWwfsOrk45LnYcGosJwzMHv+Xh/Jx5303FVOXzEnw0EpLv30mtjmlj" crossorigin="anonymous"></script>
+        <script>
+
+            function change() {
+                document.getElementById("logoutButton").style.color = 'black';
+            }
+            function back() {
+                document.getElementById("logoutButton").style.color = 'lightgrey';
+            }
+
+            var loc;
+            if(window.location.port != "") {
+                loc = window.location.protocol+"//"+window.location.hostname+":"+window.location.port;
+            } else {
+                loc = window.location.protocol+"//"+window.location.hostname;
+            }
+
+            $(document).ready(function() {
+                $('#country').on('change', function() {
+                    var country_id = this.value;
+                    $("#state").html('');
+                    $.ajax({
+                        url: loc+"/getstates",
+                        type: "POST",
+                        data: {
+                            name: 'countrylabel',
+                            country_id: country_id,
+                        },
+                        dataType: 'json',
+                        success: function(result) {
+                            $('#state').html('<option value="">--Select State--</option>');
+                            $.each(result.states, function(key, value) {
+                                $("#state").append('<option value="' + value.id + '">' + value.name + '</option>');
+                            });
+                            $('#city').html('<option value="" disabled="true">--Select City--</option>')
+                        }
+                    });
+                    check();
+                });
+
+                $('#state').on('change', function() {
+                    var state_id = this.value;
+                    $("#city").html('');
+                    $.ajax({
+                        url: loc+"/getcities",
+                        type: "POST",
+                        data: {
+                            name: 'statelabel',
+                            state_id: state_id,
+                        },
+                        dataType: 'json',
+                        success: function(result) {
+                            $('#city').html('<option value="">--Select City--</option>');
+                            $.each(result.cities, function(key, value) {
+                                $("#city").append('<option value="' + value.id + '">' + value.name + '</option>');
+                            });
+                        }
+                    });
+                    check();
+                });
+
+                $('#city').on('change', function(){
+                    check();
+                });
+
+                $('#medicineName').on('input', function() {
+                    check();
+                });
+            });
+            function check() {
+                var medicineName = document.getElementById('medicineName').value;
+                var country_id = document.getElementById('country').value;
+                var state_id = document.getElementById('state').value;
+                var city_id = document.getElementById('city').value;
+                if(medicineName != '' && city_id != '') {
+                    $.ajax({
+                        url: loc+"/checkMedicineAvailability",
+                        type: "POST",
+                        data: {
+                            name: 'medicinelabel',
+                            medicineName: medicineName,
+                            country_id: country_id,
+                            state_id: state_id,
+                            city_id: city_id
+                        },
+                        dataType: 'json',
+                        success: function(result) {
+                            var value;
+                            $('#tableBody').html('');
+                            $.each(result.data, function(key, val) {
+                                if(val.stock != 0) {
+                                    $('#tableBody').append('<tr><td>'+val.medicine+'</td><td>'+val.category+'</td><td>'+val.name+'</td><td>'+val.city+', '+val.state+', '+val.country+'</td><td>'+val.stock+'</td><td>'+val.sellingprice+'</td><td><button type="submit" class="btn btn-danger btn-sm" onclick="wakeCart('+val.medicineid+', '+val.id+')" style="margin: 0px 2px;"><i class="fas fa-shopping-cart"></i> Buy</button></td></tr>');
+                                } 
+                            });
+                        }
+                    });
+                } else {
+                    $('#tableBody').html('<tr><td valign="top" class="dataTables_empty">No data available in table</td></tr>');
+                }
+            }
+
+            function wakeCart(medicineid, pharmacyid) {
+                const quantity = prompt("Enter quantity:");
+                const address = prompt('Enter delivery address:')
+                $.ajax({
+                    url: loc+"/order",
+                    type: "POST",
+                    data: {
+                        name: 'orderMedicine',
+                        pharmacyid: pharmacyid,
+                        medicineid: medicineid,
+                        quantity: quantity,
+                        address: address
+                    },
+                    dataType: "JSON",
+                    success: function() {
+                        document.getElementById('medicineName').value = '';
+                        $('#tableBody').html('');
+                    }
+                });
+            }
+        </script>
+
+    </body>
+</html>

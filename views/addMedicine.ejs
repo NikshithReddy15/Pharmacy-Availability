@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome to MedEZ</title>
+        
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+        <!-- Ajax -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body class="hold-transition sidebar-mini">
+        <div class="wrapper">
+            
+            <!-- Navbar -->
+            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"> 
+                            <i class="fas fa-bars"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item d-none d-sm-inline-block">
+                    <a href="/pharmacyDashboard" class="nav-link">Home</a>
+                    </li>
+                </ul>
+                
+                <a href="/logout" class="nav-item nav-link ml-auto">Logout</a>
+            </nav>
+            <!-- /.navbar -->
+            
+            <aside class="main-sidebar sidebar-dark-primary elevation-4">
+                <a href="/pharmacyProfileInfo" class="brand-link">
+                <span class="brand-text font-weight-light">
+                    Welcome, <br>
+                    <span class="brand-text font-weight-light" style="font-size: medium;"><%=details[0].name%></span>
+                </span>
+                </a>
+                <!-- Sidebar -->
+                <div class="sidebar">
+                    <!-- Sidebar Menu -->
+                    <nav class="mt-2">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                            <li class="nav-item">
+                                <a href="addMedicinePage" class="nav-link">
+                                <i class="nav-icon far fa-circle text-info"></i>
+                                <p class="text">Add Medicine</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="depletedStock" class="nav-link">
+                                <i class="nav-icon far fa-circle text-info"></i>
+                                <p class="text">Depleted Stock</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="updateStockPage" class="nav-link">
+                                <i class="nav-icon far fa-circle text-info"></i>
+                                <p class="text">Update Stock Details</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pharmacyOrdersPage" class="nav-link">
+                                <i class="nav-icon far fa-circle text-info"></i>
+                                <p class="text">Received Orders</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- /.sidebar-menu -->
+                </div>
+                <!-- /.sidebar -->
+            </aside>
+                
+            <div class="content-wrapper" style="padding: 0 8px;">
+                <section class="content-header">
+                    <h1>MedEZ</h1>
+                </section>
+
+                <section class="content-body" style="padding: 8px 0px;">
+                    <div class="card">
+                        <div class="card-title card-header bg-primary">Add Medicine</div>
+                        <form action="/addMedicine" method="post">
+                            <div class="card-body" style="height: 300px;">
+                                <div class="row form-control-sm" style="margin: 20px 0;">
+                                    <label for="" class="form-control-sm col-4 col-form-label"><b>Enter medicine category: </b></label>
+                                    <div class="col-8"><input type="text" class="form-control form-control-sm" placeholder="Category" required="" id="category" name="category"></input></div><br/>
+                                </div>
+                                <div class="row form-control-sm" style="margin: 20px 0;">
+                                    <label for="" class="form-control-sm col-4 col-form-label"><b>Enter medicine name: </b></label>
+                                    <div class="col-sm-8"><input type="text" class="form-control form-control-sm" placeholder="Medicine name" required="" id="name" name="name"></input></div><br/>
+                                </div>
+                                <div class="row form-control-sm" style="margin: 20px 0;">
+                                    <label for="" class="form-control-sm col-4 col-form-label"><b>Enter available stock: </b></label>
+                                    <div class="col-sm-8"><input type="text" class="form-control form-control-sm" placeholder="Available stock" required="" id="stock" name="stock"></input></div><br/>
+                                </div>
+                                <div class="row form-control-sm" style="margin: 20px 0;">
+                                    <label for="" class="form-control-sm col-4 col-form-label"><b>Enter cost price: </b></label>
+                                    <div class="col-sm-8"><input type="text" class="form-control form-control-sm" placeholder="Cost price" required="" id="costprice" name="costprice"></input></div><br/>
+                                </div>
+                                <div class="row form-control-sm" style="margin: 20px 0;">
+                                    <label for="" class="form-control-sm col-4 col-form-label"><b>Enter selling price: </b></label>
+                                    <div class="col-sm-8"><input type="text" class="form-control form-control-sm" placeholder="Selling price" required="" id="sellingprice" name="sellingprice"></input></div><br/>
+                                </div>
+                            </div>
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-sm btn-info form-control" style="width: fit-content" id="submitButton"><i class="fas fa-plus-square"> Add medicine</i></button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+            </aside>
+            <!-- /.control-sidebar -->
+        </div>
+        <!-- ./wrapper -->
+
+        <!-- jQuery -->
+        <script src="/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- overlayScrollbars -->
+        <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="/dist/js/adminlte.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="/dist/js/demo.js"></script>
+
+        <script>
+            var loc;
+            if(window.location.port != "") {
+                loc = window.location.protocol+"//"+window.location.hostname+":"+window.location.port;
+            } else {
+                loc = window.location.protocol+"//"+window.location.hostname;
+            }
+
+            var x = 0;
+            $('#oldPassword').on('input', check)
+            $('#newPassword').on('input', check);
+            $('#newPasswordConfirm').on('input', check);
+            function check() {
+                if(x == 1 && document.getElementById('oldPassword').value != "" && document.getElementById('newPassword').value != "" && document.getElementById('newPassword').value.localeCompare(document.getElementById('newPasswordConfirm').value) == 0) {
+                    document.getElementById('submitButton').disabled = false;
+                } else {
+                    document.getElementById('submitButton').disabled = true;
+                }
+            }
+            $(document).ready(function() {
+                $('#oldPassword').on('input', function() {
+                    document.getElementById('submitButton').disabled = true;
+                    var oldPassword = this.value;
+                    $.ajax({
+                        url: loc+"/oldPharmacyPasswordChecker",
+                        type: 'POST',
+                        data: {
+                            name: 'oldPasswordChecker',
+                            oldPassword: oldPassword,
+                        },
+                        dataType: 'JSON',
+                        success: function(result) {
+                            console.log(result.res[0].boolean)
+                            if(result.res[0].boolean == 1) {
+                                document.getElementById('hiddenElement').style.visibility = 'hidden';
+                                x = 1;
+                                check();
+                            } else {
+                                document.getElementById('hiddenElement').style.visibility = 'visible';
+                                x = 0;
+                                check();
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

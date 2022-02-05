@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Welcome to MedEZ</title>
+        
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    </head>
+    <body class="hold-transition sidebar-mini">
+        <div class="wrapper">
+            <!-- Navbar -->
+            <nav class="card-header navbar navbar-expand navbar-white navbar-light">
+                <!-- Left navbar links -->
+                <div class="navbar-nav nav-item">
+                    <a href="/" class="nav-link">About Us</a>
+                </div>
+                <div class="navbar-nav nav-item ml-auto">
+                    <a href="/pharmacyLogin" class="nav-link">Seller Login</a>
+                    <a href="/customerLogin" class="nav-link">Customer Login</a>
+                </div>
+
+            </nav>
+
+            <div class="card-body fixed">
+                <section class="content-header">
+                    <h1>MedEZ</h1>
+                </section>
+
+                <section class="content-body">
+                    <div class="card">
+                        <div class="card-title card-header bg-primary">Pharmacy Portal</div>
+                        <form action="/checkPharmacyLogin" method="post">
+                            <div class="card-body">
+                                <div class="row form-control-sm" style="margin: 20px 0;">
+                                    <label for="" class="form-control-sm col-4 col-form-label">Login ID</label>
+                                    <div class="col-8"><input type="email" class="form-control form-control-sm" placeholder="Enter your Login ID" id="pharmacyID" name="pharmacyID" required></div>
+                                </div>
+                                <div class="row form-control-sm" style="margin: 20px 0;">
+                                    <label for="" class="form-control-sm col-4 col-form-label">Password</label>
+                                    <div class="col-8"><input type="password" class="form-control form-control-sm" placeholder="Enter your Password" id="pharmacyPassword" name="pharmacyPassword" required></div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer row" style="margin: 0;">
+                                <ul class="">
+                                    <button type="submit" class="btn btn-info">Login</button>
+                                </ul>
+                                <ul class="ml-auto">
+                                    <a href="/pharmacyRegistration">Not a part of our system? Sign-up for free.</a>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </body>
+</html>
