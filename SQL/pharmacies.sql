@@ -21,6 +21,10 @@ SET time_zone = "+00:00";
 -- Database: `apharmacies`
 --
 
+CREATE DATABASE pharmacies;
+
+USE pharmacies;
+
 -- --------------------------------------------------------
 
 --
